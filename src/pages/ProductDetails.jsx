@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Col, ListGroup, Row } from "react-bootstrap";
+import { Button, Col, ListGroup, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { filterProductsCategoryThunk } from "../store/slices/products.Slice";
@@ -42,6 +42,9 @@ const ProductDetails = () => {
           </div>
           <br />
           <p>{product.description} </p>
+          <Button variant="primary" size="xlg" className="mb-5">
+            Add to cart
+          </Button>
         </Col>
 
         {/*Related Products*/}
