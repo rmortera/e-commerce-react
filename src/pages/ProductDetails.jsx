@@ -47,6 +47,8 @@ const ProductDetails = () => {
           </Button>
         </Col>
 
+        <Col></Col>
+
         {/*Related Products*/}
         <Col lg={3}>
           {" "}
