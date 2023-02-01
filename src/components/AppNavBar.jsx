@@ -7,7 +7,7 @@ import {
   Offcanvas,
 } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
-import PurchasesSidebar from "./PurchasesSidebar";
+import Cart from "./Cart";
 
 const AppNavBar = () => {
   const navigate = useNavigate();
@@ -44,7 +44,7 @@ const AppNavBar = () => {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <PurchasesSidebar show={show} handleClose={handleClose} />
+      <Cart show={show} handleClose={handleClose} />
     </>
   );
 };
