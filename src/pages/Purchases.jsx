@@ -12,6 +12,8 @@ const Purchases = () => {
     dispatch(getPurchasesThunk());
   }, []);
 
+  console.log(purchases);
+
   return (
     <div>
       <h1>Purchases</h1>
