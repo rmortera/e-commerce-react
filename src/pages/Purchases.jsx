@@ -29,7 +29,11 @@ const Purchases = () => {
                     <Card.Body>
                       <Card.Title>{purchase.product?.title}</Card.Title>
                       <Card.Text>${purchase.product?.price}</Card.Text>
-                      <Button variant="primary">Purchase</Button>
+
+                      <Button variant="primary">
+                        {" "}
+                        <i className="fa-solid fa-cart-shopping"></i>
+                      </Button>
                     </Card.Body>
                   </Card>
                 </Link>

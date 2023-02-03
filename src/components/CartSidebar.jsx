@@ -1,15 +1,24 @@
 import React, { useEffect } from "react";
-import { Button, Card, Offcanvas } from "react-bootstrap";
+import { Button, Card, Col, Offcanvas, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getCartThunk, purchasesCartThunk } from "../store/slices/cart.Slice";
 
 const CartSidebar = ({ show, handleClose }) => {
-  const purchaseCart = useSelector((state) => state.cart);
+  const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
+
+  let total = 0;
+  cart.forEach((product) => {
+    console.log(product);
+    const productTotal = Number(product.product.price) * product.quantity;
+    total += productTotal;
+  });
 
   useEffect(() => {
     dispatch(getCartThunk());
   }, []);
+
+  // console.log(cart);
 
   return (
     <Offcanvas placement="end" show={show} onHide={handleClose}>
@@ -18,23 +27,29 @@ const CartSidebar = ({ show, handleClose }) => {
       </Offcanvas.Header>
       <Offcanvas.Body>
         <ul>
-          {purchaseCart?.map((cartProduct) => (
-            <li>
-              <Card>
-                <Card.Img
-                  variant="top"
-                  src={cartProduct.product.images[0].url}
-                />
-                <Card.Body>
-                  <Card.Title>{cartProduct.product.title}</Card.Title>
-                  <Card.Text>{cartProduct.product.price}</Card.Text>
-                </Card.Body>
-              </Card>
-            </li>
-          ))}
+          <Row className="g-2">
+            {cart?.map((cartProduct) => (
+              <li key={cartProduct.id}>
+                <Col>
+                  <Card>
+                    <Card.Img
+                      variant="start"
+                      src={cartProduct.product.images[0].url}
+                      style={{ height: 50, objectFit: "contain" }}
+                    />
+                    <Card.Body>
+                      <Card.Title>{cartProduct.product.title}</Card.Title>
+                      <Card.Text>${cartProduct.product.price}</Card.Text>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              </li>
+            ))}
+          </Row>
         </ul>
-
-        <Button onClick={() => dispatch(purchasesCartThunk())}>Checkout</Button>
+        <Button onClick={() => dispatch(purchasesCartThunk())}>Checkout</Button>{" "}
+        <Card.Title placement="end">Total:</Card.Title>
+        <Card.Text>${total}</Card.Text>
       </Offcanvas.Body>
     </Offcanvas>
   );

@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { addCartThunk } from "../store/slices/cart.Slice";
 import { filterProductsCategoryThunk } from "../store/slices/products.Slice";
+import Purchases from "./Purchases";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -24,7 +25,7 @@ const ProductDetails = () => {
 
   const [quantity, setQuantity] = useState("");
 
-  const addToCart = (id) => {
+  const addToCart = () => {
     const cartPurchases = {
       quantity: quantity,
       productId: product.id,
@@ -34,7 +35,7 @@ const ProductDetails = () => {
   };
 
   return (
-    <div>
+    <>
       <div>
         <h1>{product.title}</h1>
         <h4>${product.price} </h4>
@@ -87,7 +88,7 @@ const ProductDetails = () => {
           </ListGroup>
         </Col>
       </Row>
-    </div>
+    </>
   );
 };
 

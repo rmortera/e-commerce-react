@@ -44,6 +44,10 @@
   border-color: #fff transparent #fff transparent;
   animation: lds-hourglass 1.2s infinite;
 }
+
+ul {
+  list-style: none;
+}
 @keyframes lds-hourglass {
   0% {
     transform: rotate(0);
