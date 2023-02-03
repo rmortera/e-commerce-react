@@ -4,12 +4,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCartThunk, purchasesCartThunk } from "../store/slices/cart.Slice";
 
 const CartSidebar = ({ show, handleClose }) => {
-  const cart = useSelector((state) => state.cart);
+  const purchaseCart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getCartThunk());
   }, []);
+
+  console.log(purchaseCart);
 
   return (
     <Offcanvas placement="end" show={show} onHide={handleClose}>
@@ -19,7 +21,7 @@ const CartSidebar = ({ show, handleClose }) => {
       <Offcanvas.Body>
         <Button onClick={() => dispatch(purchasesCartThunk())}>Checkout</Button>
         <ul>
-          {cart?.map((cartProduct) => (
+          {purchaseCart?.map((cartProduct) => (
             <li>
               <img src={cartProduct.product.images[0].url} alt="" />
               {cartProduct.product.title}

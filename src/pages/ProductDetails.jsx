@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Button, Col, ListGroup, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
+import { addCartThunk } from "../store/slices/cart.Slice";
 import { filterProductsCategoryThunk } from "../store/slices/products.Slice";
 
 const ProductDetails = () => {
@@ -21,7 +22,15 @@ const ProductDetails = () => {
       });
   }, [id]);
 
-  console.log(product);
+  const [quantity, setQuantity] = useState("");
+
+  const addToCart = (id) => {
+    const cartPurchases = {
+      quantity: quantity,
+      productId: product.id,
+    };
+    dispatch(addCartThunk(cartPurchases));
+  };
 
   return (
     <div>
@@ -42,12 +51,23 @@ const ProductDetails = () => {
           </div>
           <br />
           <p>{product.description} </p>
-          <Button variant="primary" size="xlg" className="mb-5">
+          <div>
+            <input
+              type="text"
+              value={quantity}
+              onChange={(e) => setQuantity(e.target.value)}
+            />
+          </div>{" "}
+          <br />
+          <Button
+            onClick={addToCart}
+            variant="primary"
+            size="xlg"
+            className="mb-5"
+          >
             Add to cart
           </Button>
         </Col>
-
-        <Col></Col>
 
         {/*Related Products*/}
         <Col lg={3}>

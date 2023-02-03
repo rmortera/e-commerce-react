@@ -8,8 +8,8 @@ export const cartSlice = createSlice({
   initialState: [],
   reducers: {
     setCart: (state, action) => {
-      const cart = action.payload;
-      return cart;
+      const purchaseCart = action.payload;
+      return purchaseCart;
     },
   },
 });
