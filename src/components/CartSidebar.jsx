@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Button, Offcanvas } from "react-bootstrap";
+import { Button, Card, Offcanvas } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getCartThunk, purchasesCartThunk } from "../store/slices/cart.Slice";
 
@@ -11,23 +11,30 @@ const CartSidebar = ({ show, handleClose }) => {
     dispatch(getCartThunk());
   }, []);
 
-  console.log(purchaseCart);
-
   return (
     <Offcanvas placement="end" show={show} onHide={handleClose}>
       <Offcanvas.Header closeButton>
         <Offcanvas.Title>Your Cart</Offcanvas.Title>
       </Offcanvas.Header>
       <Offcanvas.Body>
-        <Button onClick={() => dispatch(purchasesCartThunk())}>Checkout</Button>
         <ul>
           {purchaseCart?.map((cartProduct) => (
             <li>
-              <img src={cartProduct.product.images[0].url} alt="" />
-              {cartProduct.product.title}
+              <Card>
+                <Card.Img
+                  variant="top"
+                  src={cartProduct.product.images[0].url}
+                />
+                <Card.Body>
+                  <Card.Title>{cartProduct.product.title}</Card.Title>
+                  <Card.Text>{cartProduct.product.price}</Card.Text>
+                </Card.Body>
+              </Card>
             </li>
           ))}
         </ul>
+
+        <Button onClick={() => dispatch(purchasesCartThunk())}>Checkout</Button>
       </Offcanvas.Body>
     </Offcanvas>
   );

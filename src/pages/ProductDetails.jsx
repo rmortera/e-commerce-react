@@ -30,6 +30,7 @@ const ProductDetails = () => {
       productId: product.id,
     };
     dispatch(addCartThunk(cartPurchases));
+    alert("Product succesfully added to your cart");
   };
 
   return (
